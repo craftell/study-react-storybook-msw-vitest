@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Form } from './Form';
 import { http, HttpResponse } from 'msw';
-import { action } from '@storybook/addon-actions';
+import { userEvent, waitFor, within, expect, fn } from '@storybook/test';
 
 export const mockHandler = [
   http.get('/api/options', () => {
@@ -18,7 +18,7 @@ export const mockHandler = [
 const meta: Meta<typeof Form> = {
   component: Form,
   args: {
-    onSubmit: action('submit'),
+    onSubmit: fn(),
   },
   parameters: {
     msw: {
@@ -32,4 +32,37 @@ export default meta;
 
 type Story = StoryObj<typeof Form>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ args, canvasElement, step }) => {
+    // Arrange
+    const canvas = within(canvasElement);
+
+    await step('Wait for form to be ready', async () => {
+      // await userEvent.type(canvas.getByTestId('email'), 'hi@example.com');
+      // await userEvent.type(canvas.getByTestId('password'), 'supersecret');
+      await waitFor(() => {
+        const options = canvas.getAllByRole('option');
+        expect(options).toHaveLength(3);
+      });
+    });
+
+    await step('Select an option', async () => {
+      const combobox = canvas.getByRole('combobox');
+      await userEvent.selectOptions(combobox, 'option-c');
+    });
+
+    // Act
+    await step('Submit form', async () => {
+      const submitButton = canvas.getByRole('button', { name: 'Submit' });
+      await userEvent.click(submitButton);
+    });
+
+    // Assert
+    // 👇 Now we can assert that the onSubmit arg was called
+    await waitFor(() =>
+      expect(args.onSubmit).toHaveBeenCalledWith({
+        option: 'option-c',
+      })
+    );
+  },
+};
