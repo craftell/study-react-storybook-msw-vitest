@@ -38,8 +38,6 @@ export const Default: Story = {
     const canvas = within(canvasElement);
 
     await step('Wait for form to be ready', async () => {
-      // await userEvent.type(canvas.getByTestId('email'), 'hi@example.com');
-      // await userEvent.type(canvas.getByTestId('password'), 'supersecret');
       await waitFor(() => {
         const options = canvas.getAllByRole('option');
         expect(options).toHaveLength(3);
