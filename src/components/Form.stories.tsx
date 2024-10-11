@@ -59,6 +59,7 @@ export const Default: Story = {
     // 👇 Now we can assert that the onSubmit arg was called
     await waitFor(() =>
       expect(args.onSubmit).toHaveBeenCalledWith({
+        name: '',
         option: 'option-c',
       })
     );

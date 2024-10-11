@@ -48,6 +48,12 @@ export const Form: FC<Props> = ({ onSubmit }) => {
             </option>
           ))}
         </select>
+        <input
+          name="name"
+          type="text"
+          placeholder="Enter your name"
+          style={{ padding: '5px' }}
+        />
         <button
           type="submit"
           style={{ maxWidth: '80px', alignSelf: 'flex-end' }}
