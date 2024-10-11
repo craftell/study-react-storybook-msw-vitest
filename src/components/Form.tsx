@@ -35,8 +35,9 @@ export const Form: FC<Props> = ({ onSubmit }) => {
       }}
     >
       <h1 style={{ fontSize: '1.5rem', marginTop: 0, marginBottom: '1rem' }}>
-        This is a Form
+        This is a For
       </h1>
+      <h3 style={{ fontSize: '1rem', marginTop: 0, marginBottom: '1rem' }}>Please enter information.</h3>
       <form
         onSubmit={handleSubmit}
         style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
