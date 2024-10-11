@@ -35,7 +35,7 @@ export const Form: FC<Props> = ({ onSubmit }) => {
       }}
     >
       <h1 style={{ fontSize: '1.5rem', marginTop: 0, marginBottom: '1rem' }}>
-        Form
+        This is a Form
       </h1>
       <form
         onSubmit={handleSubmit}
