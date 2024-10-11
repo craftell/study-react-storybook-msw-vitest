@@ -21,3 +21,5 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
+        env:
+          STORYBOOK_HOGEHOGE: CI_HOGE-HOGE
