@@ -42,3 +42,15 @@ jobs:
           onlyChanged: true
         env:
           STORYBOOK_HOGEHOGE: CI_HOGE-HOGE
+
+  chromatic-approve:
+    name: Run Chromatic and Approve
+    needs: [changed-files]
+    if: ${{ needs.changed-files.outputs.any_changed == 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          skip: "*" 
