@@ -27,19 +27,41 @@ export const Form: FC<Props> = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div style={{ marginBottom: '1rem' }}>
-        <select name="option">
+    <div
+      style={{
+        padding: '0.5rem 1rem',
+        border: '1px solid',
+        maxWidth: '200px',
+      }}
+    >
+      <h1 style={{ fontSize: '1.5rem', marginTop: 0, marginBottom: '1rem' }}>
+        This is a Form.({import.meta.env.STORYBOOK_HOGEHOGE})
+      </h1>
+      <h3 style={{ fontSize: '1rem', marginTop: 0, marginBottom: '1rem' }}>Please enter information.</h3>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
+        <select name="option" style={{ width: '100%', padding: '5px' }}>
           {options.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+        <input
+          name="name"
+          type="text"
+          placeholder="Enter your name"
+          style={{ padding: '5px' }}
+        />
+        <button
+          type="submit"
+          style={{ maxWidth: '80px', alignSelf: 'flex-end' }}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
